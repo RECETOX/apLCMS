@@ -27,8 +27,7 @@ RUN Rscript \
     -e 'BiocManager::install(version = "3.10")' \
     -e 'BiocManager::install("mzR")'
 
-RUN Rscript \
-    -e 'remotes::install_version("arrow", version = "0.17.0")'
+RUN Rscript -e 'BiocManager::install("rhdf5")'
 
 ADD apLCMS /apLCMS
 RUN R CMD INSTALL /apLCMS \
