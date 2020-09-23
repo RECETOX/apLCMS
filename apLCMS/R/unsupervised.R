@@ -236,19 +236,24 @@ unsupervised <- function(
   recovered_features <- cbind(aligned$aligned.ftrs[, 1:4], recovered$features)
 
   colnames(recovered_times) <-
-    colnames(recovered_features) <-
     colnames(aligned$pk.times) <-
-    colnames(aligned$aligned.ftrs) <-
-    c("mz", "rt", "mz.min", "mz.max", basename(files))
+      c("mz", "rt", "mz.min", "mz.max", paste0("time-", basename(files)))
+  colnames(aligned$aligned.ftrs) <-
+    colnames(recovered_features) <-
+      c("mz", "rt", "mz.min", "mz.max", paste0("intensity-", basename(files)))
+
+  aligned_times <- subset(aligned$pk.times, select = -c(mz.min, mz.max))
+  recovered_times <- subset(recovered_times, select = -c(mz.min, mz.max))
+
+  final_peaks <- merge(recovered_features, recovered_times, by = c("mz", "rt"))
+  aligned_peaks <- merge(aligned$aligned.ftrs, aligned_times, by = c("mz", "rt"))
 
   list(
+    final_peaks = as.data.frame(final_peaks),
+    aligned_peaks = as.data.frame(aligned_peaks),
+    aligned_mz_tolerance = as.numeric(aligned$mz.tol),
+    aligned_rt_tolerance = as.numeric(aligned$chr.tol),
     extracted_features = as.data.frame(do.call(rbind, recovered$f1)),
-    corrected_features = as.data.frame(do.call(rbind, recovered$f2)),
-    aligned_times = as.data.frame(aligned$pk.times),
-    aligned_features = as.data.frame(aligned$aligned.ftrs),
-    final_times = as.data.frame(recovered_times),
-    final_features = as.data.frame(recovered_features),
-    aligned_mz_tolerance = aligned$mz.tol,
-    aligned_rt_tolerance = aligned$chr.tol
+    corrected_features = as.data.frame(do.call(rbind, recovered$f2))
   )
 }
