@@ -149,7 +149,7 @@ unsupervised <- function(
   min_bandwidth = NA,
   max_bandwidth = NA,
   sd_cut = c(0.01, 500),
-  sigma_ratio_lim = c(0.1, 10),
+  sigma_ratio_lim = c(0.01, 100),
   component_eliminate = 0.01,
   moment_power = 1,
   align_mz_tol = NA,
