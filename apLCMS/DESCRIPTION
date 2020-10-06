@@ -12,3 +12,5 @@ License: GPL(>=2)
 LazyLoad: yes
 NeedsCompilation: no
 Packaged: 2019-11-27 01:00:56 UTC; Tianwei
+Suggests:
+    hdf5r
