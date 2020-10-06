@@ -1,4 +1,4 @@
-FROM rocker/r-ver:3.6.3
+FROM rocker/r-ver:4.0.0
 
 RUN apt-get update && apt-get install -yq \
     libfreetype6-dev \
@@ -24,10 +24,10 @@ RUN Rscript \
     -e 'remotes::install_version("ROCS", version = "1.3")' \
     -e 'remotes::install_version("snow", version = "0.4-3")' \
     -e 'remotes::install_version("BiocManager", version = "1.30.10")' \
-    -e 'BiocManager::install(version = "3.10")' \
+    -e 'BiocManager::install(version = "3.11")' \
     -e 'BiocManager::install("mzR")'
 
-RUN Rscript -e 'remotes::install_version("hdf5r", version = "1.3.3")'
+RUN Rscript -e 'remotes::install_version("hdf5r", version = "1.3.2")'
 
 ADD apLCMS /apLCMS
 RUN R CMD INSTALL /apLCMS \
