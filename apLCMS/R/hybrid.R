@@ -242,7 +242,6 @@ hybrid <- function(
 
   message("**** second round time correction ****")
   recovered_f2 <- adjust.time(
-  recovered_f2 <- adjust.time(
     features = recovered$f1,
     mz.tol = align_mz_tol,
     chr.tol = align_chr_tol,

@@ -1,5 +1,5 @@
 .check_hdf5r_package <- function() {
-  if (!requireNamespace("pkg", quietly = TRUE))
+  if (!requireNamespace("hdf5r", quietly = TRUE))
     stop("Package \"hdf5r\" is needed for this functionality. Please install it.", call. = FALSE)
 }
 
