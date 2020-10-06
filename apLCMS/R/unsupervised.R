@@ -194,7 +194,7 @@ unsupervised <- function(
   )
 
   message("**** time correction ****")
-  corrected <- apLCMS::adjust.time(
+  corrected <- adjust.time(
     features = features,
     mz.tol = align_mz_tol,
     chr.tol = align_chr_tol,
@@ -204,7 +204,7 @@ unsupervised <- function(
   )
 
   message("**** feature alignemnt ****")
-  aligned <- apLCMS::feature.align(
+  aligned <- feature.align(
     features = corrected,
     min.exp = min_exp,
     mz.tol = align_mz_tol,
@@ -237,10 +237,10 @@ unsupervised <- function(
 
   colnames(recovered_times) <-
     colnames(aligned$pk.times) <-
-      c("mz", "rt", "mz.min", "mz.max", paste0("time-", basename(files)))
+      c("mz", "rt", "mz_min", "mz_max", paste0("time.", basename(files)))
   colnames(aligned$aligned.ftrs) <-
     colnames(recovered_features) <-
-      c("mz", "rt", "mz.min", "mz.max", paste0("intensity-", basename(files)))
+      c("mz", "rt", "mz_min", "mz_max", paste0("intensity.", basename(files)))
 
   aligned_times <- subset(aligned$pk.times, select = -c(mz.min, mz.max))
   recovered_times <- subset(recovered_times, select = -c(mz.min, mz.max))

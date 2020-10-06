@@ -241,7 +241,8 @@ hybrid <- function(
   )
 
   message("**** second round time correction ****")
-  recovered_f2 <- apLCMS::adjust.time(
+  recovered_f2 <- adjust.time(
+  recovered_f2 <- adjust.time(
     features = recovered$f1,
     mz.tol = align_mz_tol,
     chr.tol = align_chr_tol,
@@ -251,7 +252,7 @@ hybrid <- function(
   )
 
   message("**** second round feature alignment ****")
-  recovered_aligned <- apLCMS::feature.align(
+  recovered_aligned <- feature.align(
     features = recovered_f2,
     min.exp = min_exp,
     mz.tol = align_mz_tol,
@@ -271,10 +272,10 @@ hybrid <- function(
 
   colnames(aligned$pk.times) <-
     colnames(recovered_aligned$pk.times) <-
-      c("mz", "rt", "mz.min", "mz.max", paste0("time-", basename(files)))
+      c("mz", "rt", "mz_min", "mz_max", paste0("time.", basename(files)))
   colnames(aligned$aligned.ftrs) <-
     colnames(recovered_aligned$aligned.ftrs) <-
-      c("mz", "rt", "mz.min", "mz.max", paste0("intensity-", basename(files)))
+      c("mz", "rt", "mz_min", "mz_max", paste0("intensity.", basename(files)))
 
   aligned_times <- subset(aligned$pk.times, select = -c(mz.min, mz.max))
   recovered_times <- subset(recovered_aligned$pk.times, select = -c(mz.min, mz.max))
