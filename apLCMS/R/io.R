@@ -20,7 +20,7 @@ save_known_table_to_hdf <- function(path, known_table) {
   file <- hdf5r::H5File$new(path, mode = "w")
   on.exit(file$close_all())
 
-  f[["aplcms_known_table"]] <- known_table
+  file[["aplcms_known_table"]] <- known_table
   invisible(known_table)
 }
 
