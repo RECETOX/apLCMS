@@ -242,8 +242,8 @@ unsupervised <- function(
     colnames(recovered_features) <-
       c("mz", "rt", "mz_min", "mz_max", paste0("intensity.", basename(files)))
 
-  aligned_times <- subset(aligned$pk.times, select = -c(mz.min, mz.max))
-  recovered_times <- subset(recovered_times, select = -c(mz.min, mz.max))
+  aligned_times <- subset(aligned$pk.times, select = -c(mz_min, mz_max))
+  recovered_times <- subset(recovered_times, select = -c(mz_min, mz_max))
 
   final_peaks <- merge(recovered_features, recovered_times, by = c("mz", "rt"))
   aligned_peaks <- merge(aligned$aligned.ftrs, aligned_times, by = c("mz", "rt"))
