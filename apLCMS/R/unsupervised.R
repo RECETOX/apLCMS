@@ -160,10 +160,14 @@ unsupervised <- function(
   use_observed_range = TRUE,
   recover_min_count = 3,
   intensity_weighted = FALSE,
-  cluster = NULL
+  cluster = NULL,
+  cores = NULL
 ) {
   if (is.null(cluster)) {
-    cluster <- parallel::makeCluster(parallel::detectCores())
+    if (is.null(cores)) {
+      cores = parallel::detectCores() / 2	# XXX: logical=FALSE does not work on linux, and HT is virtually everywhere nowadays
+    }
+    cluster <- parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cluster))
   }
 
@@ -190,7 +194,8 @@ unsupervised <- function(
     peak_estim_method = peak_estim_method,
     component_eliminate = component_eliminate,
     moment_power = moment_power,
-    BIC_factor = BIC_factor
+    BIC_factor = BIC_factor,
+    cluster = cluster
   )
 
   message("**** time correction ****")
@@ -229,7 +234,8 @@ unsupervised <- function(
     orig_tol = mz_tol,
     min_bandwidth = min_bandwidth,
     max_bandwidth = max_bandwidth,
-    recover_min_count = recover_min_count
+    recover_min_count = recover_min_count,
+    cluster = cluster
   )
 
   recovered_times <- cbind(aligned$pk.times[, 1:4], recovered$times)
