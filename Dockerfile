@@ -22,10 +22,11 @@ RUN Rscript \
     -e 'remotes::install_version("rgl", version = "0.100.50")' \
     -e 'remotes::install_version("ROCR", version = "1.0-7")' \
     -e 'remotes::install_version("ROCS", version = "1.3")' \
-    -e 'remotes::install_version("snow", version = "0.4-3")' \
-    -e 'remotes::install_version("BiocManager", version = "1.30.10")' \
-    -e 'BiocManager::install(version = "3.11")' \
-    -e 'BiocManager::install("mzR")'
+    -e 'remotes::install_version("snow", version = "0.4-3")'
+
+RUN Rscript -e 'remotes::install_version("BiocManager", version = "1.30.10")' 
+RUN Rscript -e 'BiocManager::install(version = "3.11",ask = FALSE)'
+RUN Rscript -e 'BiocManager::install("mzR")'
 
 RUN Rscript -e 'remotes::install_version("hdf5r", version = "1.3.2")'
 
