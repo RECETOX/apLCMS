@@ -161,11 +161,13 @@ hybrid <- function(
   use_observed_range = TRUE,
   recover_min_count = 3,
   intensity_weighted = FALSE,
-  cluster = NULL
+  cluster = parallel::detectCores()
 ) {
-  if (is.null(cluster)) {
-    cluster <- parallel::makeCluster(parallel::detectCores())
+  if (is.numeric(cluster)) {
+    cluster <- parallel::makeCluster(cluster)
     on.exit(parallel::stopCluster(cluster))
+  } else if (!is(cluster, "cluster")) {
+    stop("unsupported value for `cluster` parameter: ", cluster)
   }
 
   # NOTE: side effect (doParallel has no functionality to clean up)
@@ -191,7 +193,8 @@ hybrid <- function(
     peak_estim_method = peak_estim_method,
     component_eliminate = component_eliminate,
     moment_power = moment_power,
-    BIC_factor = BIC_factor
+    BIC_factor = BIC_factor,
+    cluster = cluster
   )
 
   message("**** time correction ****")
@@ -237,7 +240,8 @@ hybrid <- function(
     orig_tol = mz_tol,
     min_bandwidth = min_bandwidth,
     max_bandwidth = max_bandwidth,
-    recover_min_count = recover_min_count
+    recover_min_count = recover_min_count,
+    cluster = cluster
   )
 
   message("**** second round time correction ****")

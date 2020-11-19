@@ -160,15 +160,13 @@ unsupervised <- function(
   use_observed_range = TRUE,
   recover_min_count = 3,
   intensity_weighted = FALSE,
-  cluster = NULL,
-  cores = NULL
+  cluster = parallel::detectCores()
 ) {
-  if (is.null(cluster)) {
-    if (is.null(cores)) {
-      cores = parallel::detectCores() / 2	# XXX: logical=FALSE does not work on linux, and HT is virtually everywhere nowadays
-    }
-    cluster <- parallel::makeCluster(cores)
+  if (is.numeric(cluster)) {
+    cluster <- parallel::makeCluster(cluster)
     on.exit(parallel::stopCluster(cluster))
+  } else if (!is(cluster, "cluster")) {
+    stop("unsupported value for `cluster` parameter: ", cluster)
   }
 
   # NOTE: side effect (doParallel has no functionality to clean up)
