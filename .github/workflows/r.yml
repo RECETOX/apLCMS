@@ -19,7 +19,7 @@ jobs:
       with:
         r-version: '4.0.3'
     - name: R Build and Checks
-      uses: hechth/R-actions@880945e4464e26d88843ee4bb909208bd301964e
+      uses: hechth/R-actions@3b72d746ded2891b5b53dfd47e4517ed1a0d1b8b
       with:
         action: 'all'
         needsBioc: true
