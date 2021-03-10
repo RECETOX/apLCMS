@@ -24,9 +24,8 @@ jobs:
     - name: cleanup
       run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
       shell: bash
-    - name: R Build and Checks
-      uses: hechth/R-actions@abfb1e2af9d1b77f846a40afe5abb7fb281bb682
-      with:
-        action: 'all'
-        needsBioc: true
-        buildSubDirectory: apLCMS
+    - name: R Build
+      run: R CMD build ./apLCMS
+      shell: bash
+    - name: R Check
+      run: R CMD check apLCMS_6.6.6.tar.gz
