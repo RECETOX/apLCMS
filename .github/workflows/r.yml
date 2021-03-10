@@ -18,6 +18,12 @@ jobs:
       uses: r-lib/actions/setup-r@v1
       with:
         r-version: '4.0.3'
+    - name: Install Dependencies
+      run: apt-get update && apt-get install -yq libfreetype6-dev libglu1-mesa-dev libnetcdf-dev libpng-dev zlib1g-dev
+      shell: bash
+    - name: cleanup
+      run: apt-get clean && rm -rf /var/lib/apt/lists/*
+      shell: bash
     - name: R Build and Checks
       uses: hechth/R-actions@7b01179cdf6ec1aa402e1a3f32baa32919175543
       with:
