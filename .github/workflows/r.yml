@@ -25,7 +25,7 @@ jobs:
       run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
       shell: bash
     - name: R Build and Checks
-      uses: hechth/R-actions@7b01179cdf6ec1aa402e1a3f32baa32919175543
+      uses: hechth/R-actions@abfb1e2af9d1b77f846a40afe5abb7fb281bb682
       with:
         action: 'all'
         needsBioc: true
