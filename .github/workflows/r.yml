@@ -21,11 +21,18 @@ jobs:
     - name: Install Dependencies
       run: sudo apt-get update && sudo apt-get install -yq libfreetype6-dev libglu1-mesa-dev libnetcdf-dev libpng-dev zlib1g-dev
       shell: bash
-    - name: cleanup
+    - name: Cleanup
       run: sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
       shell: bash
     - name: R Build
       run: R CMD build ./apLCMS
       shell: bash
     - name: R Check
+      run: Rscript -e 'if (!requireNamespace("BiocManager", quietly=TRUE))  install.packages("BiocManager");if (FALSE) BiocManager::install(version = "devel", ask = FALSE);cat(append = TRUE, file = "~/.Rprofile.site", "options(repos = BiocManager::repositories());")'
+      shell: bash
+      run: Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes", repo = c(BiocManager::repositories()))'
+      shell: bash
+      run: Rscript -e 'deps <- remotes::dev_package_deps(dependencies = NA, repos = c(BiocManager::repositories()));remotes::install_deps(dependencies = TRUE, repos = c(BiocManager::repositories()));if (!all(deps$package %in% installed.packages())) { message("missing: ", paste(setdiff(deps$package, installed.packages(repo=)), collapse=", ")); q(status = 1, save = "no")}'
+      shell: bash
       run: R CMD check apLCMS_6.6.6.tar.gz
+      shell: bash
