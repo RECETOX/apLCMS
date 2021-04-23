@@ -51,23 +51,23 @@ echo ${nc[@]} | tr ' ' '	' >>$out-time.tsv
 for f in ${nf[@]}; do
 	[ $f -gt $numf ] && break
 
-	echo -n "$f	" >>$out-ret.tsv
-	echo -n "$f	" >>$out-mem.tsv
-	echo -n "$f	" >>$out-time.tsv
+	echo -n "$f" >>$out-ret.tsv
+	echo -n "$f" >>$out-mem.tsv
+	echo -n "$f" >>$out-time.tsv
 
 	for c in ${nc[@]}; do
 		if [ $c -lt  $((f / 4)) -o $c -gt $maxcores -o $c -gt $f ]; then
-			echo -n 'nan	' >>$out-ret.tsv
-			echo -n 'nan	' >>$out-mem.tsv
-			echo -n 'nan	' >>$out-time.tsv
+			echo -n '	nan' >>$out-ret.tsv
+			echo -n '	nan' >>$out-mem.tsv
+			echo -n '	nan' >>$out-time.tsv
 			continue
 		fi
 		echo $(dirname $0)/memory_single_run.sh -c $c -o $out-${f}_$c.out -e $out-${f}_$c.err ${files[@]:0:$f}
 		res=(-1 -2 -3)
 		res=($($(dirname $0)/memory_single_run.sh -c $c -o $out-${f}_$c.out -e $out-${f}_$c.err ${files[@]:0:$f}))
-		echo -n "${res[0]}	" >>$out-ret.tsv
-		echo -n "${res[1]}	" >>$out-mem.tsv
-		echo -n "${res[2]}	" >>$out-time.tsv
+		echo -n "	${res[0]}" >>$out-ret.tsv
+		echo -n "	${res[1]}" >>$out-mem.tsv
+		echo -n "	${res[2]}" >>$out-time.tsv
 	done
 	echo >>$out-ret.tsv
 	echo >>$out-mem.tsv
