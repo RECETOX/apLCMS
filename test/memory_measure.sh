@@ -37,6 +37,11 @@ while [ $n -le 64 ]; do
 	nc+=($n)
 	n=$((n+8))
 done
+n=80
+while [ $n -le 128 ]; do
+	nc+=($n)
+	n=$((n+16))
+done
 
 echo -n '	' >$out-ret.tsv
 echo ${nc[@]} | tr ' ' '	' >>$out-ret.tsv
@@ -56,7 +61,7 @@ for f in ${nf[@]}; do
 	echo -n "$f" >>$out-time.tsv
 
 	for c in ${nc[@]}; do
-		if [ $c -lt  $((f / 4)) -o $c -gt $maxcores -o $c -gt $f ]; then
+		if [ \( $c -lt  $((f / 4)) -a $c -lt $((maxcores / 2)) \) -o $c -gt $maxcores -o $c -gt $f ]; then
 			echo -n '	nan' >>$out-ret.tsv
 			echo -n '	nan' >>$out-mem.tsv
 			echo -n '	nan' >>$out-time.tsv
