@@ -1,0 +1,1 @@
+../memory_measure.sh -o /scratch.ssd/ljocha/apLCMS/test -c 6 Tribrid_201001_001-MeOH_POS_MU.mzml Tribrid_201001_002-Norman_POS_MU.mzml Tribrid_201001_003-QCstd_POS_MU.mzml Tribrid_201001_004-Blank_1_POS_MU.mzml
