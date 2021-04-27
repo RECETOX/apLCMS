@@ -3,9 +3,6 @@ export(adjust.time, cdf.to.ftr, EIC.plot, EIC.plot.learn, feature.align,
     prof.to.features, recover.weaker, semi.sup, semi.sup.learn, find.tol,
     find.turn.point, make.known.table, target.search, two.step.hybrid,
     unsupervised, hybrid)
-export(save_peaks_to_hdf)
-export(save_known_table_to_hdf)
-export(load_known_table_from_hdf)
 
 import(MASS, rgl, mzR, splines, doParallel, foreach, iterators, snow, e1071,
     ROCR, ROCS, gbm, randomForest, Rcpp)
