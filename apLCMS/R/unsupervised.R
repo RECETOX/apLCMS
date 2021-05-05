@@ -57,7 +57,8 @@ extract_features <- function(
         baseline.correct = baseline_correct,
         baseline.correct.noise.percentile = baseline_correct_noise_percentile,
         do.plot = FALSE,
-        intensity.weighted = intensity_weighted
+        intensity.weighted = intensity_weighted,
+        cache = FALSE
       )
       feat <- apLCMS::prof.to.features(
         a = prof,
