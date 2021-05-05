@@ -16,7 +16,7 @@ function(folder, file.pattern=".cdf", known.table=NA, n.nodes=4, min.exp=2, min.
     
     ###############################################################################################
     
-    dir.create("error_files")
+    try(dir.create("error_files"), silent = TRUE)
     message("***************************** prifiles --> feature lists *****************************")
     suf.prof<-paste(min.pres,min.run,mz.tol,baseline.correct,sep="_")
     if(use.learn) suf.prof<-paste(min.run, min.pres, ridge.smoother.window, mz.tol, baseline.correct, max.ftrs.to.use, do.grp.reduce, remove.bottom.ftrs, max.fpr, min.tpr, sep="_")

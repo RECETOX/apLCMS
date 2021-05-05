@@ -112,6 +112,19 @@ function(features,mz.tol=NA, chr.tol=NA,colors=NA,find.tol.max.d=1e-4, max.align
                     this.feature<-this.feature[order(this.feature[,1], this.feature[,2]),]
                 }
             }
+
+            if(sum(is.na(this.feature[,2]))>0)
+            {
+                orig.feature<-features[[j]]
+                s<-which(is.na(this.feature[,2]))
+                for(i in s)
+                {
+                    this.d<-abs(orig.feature[i,2]-orig.feature[,2])
+                    this.d[s]<-Inf
+                    this.s<-which(this.d==min(this.d))[1]
+                    this.feature[i,2]<-orig.feature[i,2]+this.feature[this.s,2]-orig.feature[this.s,2]
+                }
+            }
             this.feature
         }
     }else{

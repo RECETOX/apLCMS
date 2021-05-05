@@ -16,7 +16,7 @@ function(folder, file.pattern=".cdf", n.nodes=4, min.exp=2, min.pres=0.5, min.ru
     
     ###############################################################################################
     
-    dir.create("error_files")
+    try(dir.create("error_files"), silent = TRUE)
     message("***************************** prifiles --> feature lists *****************************")
     suf.prof<-paste(min.pres,min.run,mz.tol,baseline.correct,sep="_")
     suf<-paste(suf.prof, shape.model, sd.cut[1], sd.cut[2],component.eliminate, moment.power, sep="_")

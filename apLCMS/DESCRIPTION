@@ -1,6 +1,6 @@
 Package: apLCMS
 Title: Adaptive processing of LC-MS data
-Version: 6.6.6
+Version: 6.6.8
 Date: 2019-11-20
 Author: Tianwei Yu <tianwei.Yu@emory.edu>
 Maintainer: Tianwei Yu <tianwei.Yu@emory.edu>
@@ -11,4 +11,4 @@ biocViews: Technology, MassSpectrometry
 License: GPL(>=2)
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2019-11-27 01:00:56 UTC; Tianwei
+Packaged: 2020-05-05 00:31:58 UTC; tyu8
