@@ -23,7 +23,7 @@ function(folder, file.pattern=".cdf", known.table=NA, n.nodes=4, min.exp=2, min.
     suf<-paste(suf.prof, shape.model, min.run, min.pres, sd.cut[1], sd.cut[2],component.eliminate, moment.power, sep="_")
     if(shape.model=="bi-Gaussian") suf<-paste(suf, sigma.ratio.lim[1], sigma.ratio.lim[2],sep="_")
     
-    cl <- makeCluster(n.nodes, outfile="")
+    cl <- makeCluster(n.nodes)
     registerDoParallel(cl)
     #clusterEvalQ(cl, source("~/Desktop/Dropbox/1-work/apLCMS_code/new_proc_cdf.r"))
     clusterEvalQ(cl, library(apLCMS))

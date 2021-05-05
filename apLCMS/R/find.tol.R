@@ -14,7 +14,7 @@ function(a, uppermost=1e-4, aver.bin.size=4000, min.bins=50, max.bins=200, do.pl
     this.rate<-MASS::fitdistr(to.use, "exponential")$estimate
     exp.y<-dexp(x,rate=this.rate)
     exp.y<-exp.y*sum(y[x>max(da)/4])/sum(exp.y[x>max(da)/4])
-    
+
     yy<-cumsum(y>1.5*exp.y)
     yi<-seq_along(yy)
     sel<-min(which(yy<yi))-1
